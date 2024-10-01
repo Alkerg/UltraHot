@@ -30,5 +30,5 @@ public class Weapon : MonoBehaviour
         rb.AddForce(transform.forward * dropForce, ForceMode.Impulse);
     }
 
-
+    //comentario de prueba
 }
