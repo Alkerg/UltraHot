@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 22;
+    private float speed = 14f;
     private TrailRenderer trailRenderer;
 
     private void Start()
@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
         {
             trailRenderer.Clear();
             gameObject.SetActive(false);
+            collision.GetComponent<RedGuy>().TakeDamage(20);
         }
     }
 

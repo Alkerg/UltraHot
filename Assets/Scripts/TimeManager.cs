@@ -7,7 +7,7 @@ public class TimeManager : MonoBehaviour
 {
     private float slowDownFactor = 0.02f;
     public float slowDownLenght = 2f;
-
+    public bool isBulletTime;
 
     void Update()
     {
@@ -18,14 +18,19 @@ public class TimeManager : MonoBehaviour
         Debug.Log(Time.timeScale);
         */
     }
-    private void FixedUpdate()
-    {
 
-    }
 
-    public void DoSlowMotion()
+    public void ActivateBulletTime()
     {
         Time.timeScale = slowDownFactor;
-        //Time.fixedDeltaTime = Time.timeScale * 0.2f;
+        Time.fixedDeltaTime = Time.timeScale * .02f;
+        isBulletTime = true;
+    }
+
+    public void DeactivateBulletTime()
+    {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = .02f;
+        isBulletTime = false;
     }
 }
