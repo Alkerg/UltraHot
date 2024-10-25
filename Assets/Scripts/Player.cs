@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -20,7 +19,7 @@ public class Player : MonoBehaviour
     private const float gravity = -12f;
     private Vector3 velocity;
     private bool isGrounded;
-    private float slowDownLenght = 20f;
+    private float slowDownLenght = 20f; //1 for SuperHot bullet time system
     
 
     public bool isDropping = false;
@@ -83,20 +82,34 @@ public class Player : MonoBehaviour
 
         }
 
+        if (Time.timeScale != 1)
+        {
+            Time.timeScale += (1 / slowDownLenght) * Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1);
+        }
+        else
+        {
+            timeManager.isBulletTime = false;
+        }
+        //Time.timeScale += (1 / slowDownLenght) * Time.unscaledDeltaTime;
+        //Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1);
 
-        Time.timeScale += (1 / slowDownLenght) * Time.deltaTime;
-        Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1);
-        
 
-        //Debug.Log(Time.timeScale);
+
+        //Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+
+        //Debug.Log("DeltaTime: " + Time.timeScale);
+        //Debug.Log("FixedDeltaTime: " + Time.fixedDeltaTime);
 
         //Shoot bullets
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject bullet = BulletPool.Instance.getBullet();
-            bullet.transform.position = Camera.main.transform.position;
-            bullet.transform.rotation = Camera.main.transform.rotation;
-            //GameObject bullet = Instantiate(bulletPrefab, Camera.main.transform.position, Camera.main.transform.rotation);
+            Weapon weapon = weaponContainer.GetComponentInChildren<Weapon>();
+            if (weapon)
+            {
+                weapon.Shoot();
+            }
         }
 
         //Move the payer on the X and Z axes
@@ -108,16 +121,14 @@ public class Player : MonoBehaviour
         velocity.y += gravity * Time.unscaledDeltaTime;
         characterController.Move(velocity * Time.unscaledDeltaTime);
 
-
+        //Drop weapon
         if (Input.GetKey(KeyCode.F))
         {
-            //weaponContainer.GetComponentInChildren<Weapon>().Pull();
-            //container.GetComponent<Rigidbody>().AddForce(Vector3.forward, ForceMode.Impulse);
             Weapon weapon = weaponContainer.GetComponentInChildren<Weapon>();
             if (weapon)
             {
                 weapon.Drop();
-                StartCoroutine(Wait(.04f));
+                StartCoroutine(Wait(.04f, Time.timeScale));
             }
 
         }
@@ -131,6 +142,14 @@ public class Player : MonoBehaviour
         isDropping = true;
         yield return new WaitForSeconds(time);
         isDropping = false;
+    }
+
+    IEnumerator Wait(float time, float prevTimeScale)
+    {
+        //Return to normal speed temporarily
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(time);
+        Time.timeScale = prevTimeScale;
     }
 
 }

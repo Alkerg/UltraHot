@@ -15,6 +15,16 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+
+    }
+
+    public void Shoot()
+    {
+        Vector3 offset = Camera.main.transform.forward.normalized;
+        GameObject bullet = BulletPool.Instance.getBullet();
+        bullet.transform.position = Camera.main.transform.position + offset;
+        bullet.transform.rotation = Camera.main.transform.rotation;
+
     }
 
     public void SeparateFromParent()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     private float slowDownFactor = 0.02f;
-    public float slowDownLenght = 2f;
+    private float slowDownLenght = 2f;
     public bool isBulletTime;
 
     void Update()
@@ -23,14 +23,14 @@ public class TimeManager : MonoBehaviour
     public void ActivateBulletTime()
     {
         Time.timeScale = slowDownFactor;
-        Time.fixedDeltaTime = Time.timeScale * .02f;
+        //Time.fixedDeltaTime = Time.timeScale * .02f;
         isBulletTime = true;
     }
 
     public void DeactivateBulletTime()
     {
         Time.timeScale = 1;
-        Time.fixedDeltaTime = .02f;
+        //Time.fixedDeltaTime = .02f;
         isBulletTime = false;
     }
 }
