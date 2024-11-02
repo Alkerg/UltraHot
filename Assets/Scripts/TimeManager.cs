@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class TimeManager : MonoBehaviour
     private float slowDownFactor = 0.02f;
     private float slowDownLenght = 2f;
     public bool isBulletTime;
+    public TextMeshProUGUI TMPText;
 
     void Update()
     {
@@ -25,6 +27,7 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = slowDownFactor;
         //Time.fixedDeltaTime = Time.timeScale * .02f;
         isBulletTime = true;
+        TMPText.text = "Bullet time: On";
     }
 
     public void DeactivateBulletTime()
@@ -32,5 +35,6 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = 1;
         //Time.fixedDeltaTime = .02f;
         isBulletTime = false;
+        TMPText.text = "Bullet time: Off";
     }
 }
