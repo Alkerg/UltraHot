@@ -448,7 +448,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &138693087
@@ -3337,7 +3337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf855c3311651f41b6c16c4f46fbc57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 500
   playerBody: {fileID: 1841207944}
 --- !u!1 &978066665
 GameObject:
@@ -4692,6 +4691,14 @@ PrefabInstance:
     - target: {fileID: 4483658618797090, guid: f750d5f061e724f4c827ab6b376e2550, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64866121705718766, guid: f750d5f061e724f4c827ab6b376e2550, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64866121705718766, guid: f750d5f061e724f4c827ab6b376e2550, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 64866121705718766, guid: f750d5f061e724f4c827ab6b376e2550, type: 3}
       propertyPath: m_IsTrigger

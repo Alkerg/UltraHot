@@ -29,11 +29,13 @@ public class ObjectGrabbable : MonoBehaviour
     {
         this.objectGrabPointTransform = objectGrabPointTransform;
         rigidBody.useGravity = false;
+        rigidBody.interpolation = RigidbodyInterpolation.None;
     }
 
     public void Drop()
     {
         this.objectGrabPointTransform = null;
         rigidBody.useGravity = true;
+        rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
     }
 }

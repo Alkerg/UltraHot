@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 8f;
     public float groundDistance = 0.3f;
     public TimeManager timeManager;
     public LayerMask groundMask;
