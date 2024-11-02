@@ -40,33 +40,6 @@ public class Player : MonoBehaviour
         float X = Input.GetAxisRaw("Horizontal");   //Keys A,D
         float Z = Input.GetAxisRaw("Vertical");     //Keys W,S
 
-        /*if(X != 0 || Z != 0)    //If player moves, then the game returns to normal speed
-        {
-            if (isDropping)
-            {
-                Time.timeScale = 1;
-            }
-            else
-            {
-                Time.timeScale += (1 / slowDownLenght) * Time.unscaledDeltaTime;
-                Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1);
-                audioMixer.SetFloat("Pitch", 1f);
-            }
-        }
-        else        //If player doesn't move, then the game runs in bullet time
-        {
-            if (isDropping)
-            {
-                Time.timeScale = 1;
-            }
-            else
-            {
-                timeManager.ActivateBulletTime();
-                audioMixer.SetFloat("Pitch", 0.8f);
-            }
-
-        }*/
-
         if (Input.GetKeyDown(KeyCode.T))
         {
             if(!timeManager.isBulletTime)
@@ -89,18 +62,14 @@ public class Player : MonoBehaviour
         }
         else
         {
+            timeManager.TMPText.text = "Bullet time: Off";
             timeManager.isBulletTime = false;
         }
+
         //Time.timeScale += (1 / slowDownLenght) * Time.unscaledDeltaTime;
-        //Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1);
-
-
-
+        //Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1
         //Time.fixedDeltaTime = Time.timeScale * 0.02f;
 
-
-        //Debug.Log("DeltaTime: " + Time.timeScale);
-        //Debug.Log("FixedDeltaTime: " + Time.fixedDeltaTime);
 
         //Shoot bullets
         if (Input.GetMouseButtonDown(0))
