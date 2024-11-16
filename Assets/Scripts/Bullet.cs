@@ -20,11 +20,11 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
 
-        if (collision.gameObject.CompareTag("RedGuy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             trailRenderer.Clear();
             gameObject.SetActive(false);
-            collision.GetComponent<RedGuy>().TakeDamage(20);
+            collision.GetComponent<Enemy>().TakeDamage(20);
         }
     }
 

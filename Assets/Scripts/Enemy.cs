@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedGuy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-
     private float health = 100;
-
     void Start()
     {
         
@@ -16,11 +14,10 @@ public class RedGuy : MonoBehaviour
     {
         
     }
-
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
         {
             gameObject.SetActive(false);
         }

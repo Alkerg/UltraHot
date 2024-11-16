@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
@@ -15,6 +17,10 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
+        /*if (AbilitySelector.activeAbilitySelector)
+        {
+            return;
+        }*/
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.unscaledDeltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.unscaledDeltaTime;
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RedGuy
   - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX

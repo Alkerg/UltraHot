@@ -20,13 +20,22 @@ public class Player : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private float slowDownLenght = 20f; //1 for SuperHot bullet time system
-    
+    private int health;
+    private int maxHealth = 100;
+    private int stamina;
+    private int maxStamina = 100;
 
     public bool isDropping = false;
     public GameObject bulletPrefab;
+    public HealthBar healthBar;
+    public StaminaBar staminaBar;
 
     private void Start()
     {
+        health = maxHealth;
+        stamina = maxStamina;
+        healthBar.SetMaxHealth(maxHealth);
+        staminaBar.SetMaxStamina(maxStamina);
         characterController = GetComponent<CharacterController>();
     }
 
@@ -101,10 +110,18 @@ public class Player : MonoBehaviour
             }
 
         }
-
-
     }
 
+    public void TakeDamage(int damage)
+    {
+        if(health - damage <= 0)
+        {
+            health = 0;
+            Debug.Log("Game over");
+        }
+        else health -= damage;
+
+    }
     IEnumerator Wait(float time)
     {
         //Return to normal speed temporarily

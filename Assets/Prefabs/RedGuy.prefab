@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       propertyPath: m_Name
-      value: Character_Dummy_Male_01 Variant
+      value: RedGuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4580766925885248, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       propertyPath: m_LocalPosition.x
@@ -59,6 +63,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       insertIndex: -1
       addedObject: {fileID: -4947674149132467634}
+    - targetCorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1194521319565733336}
   m_SourcePrefab: {fileID: 100100000, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
 --- !u!1 &7942293090877063283 stripped
 GameObject:
@@ -88,3 +95,15 @@ CapsuleCollider:
   m_Height: 1.8299656
   m_Direction: 1
   m_Center: {x: 0.0032978058, y: 0.90803146, z: -0.006594181}
+--- !u!114 &1194521319565733336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7942293090877063283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fe10b81856b16478dbd4542a133d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
