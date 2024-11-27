@@ -33,6 +33,8 @@ public class Selector : MonoBehaviour
 
     private void Update()
     {
+        if (PauseManager.isGamePaused) return;
+
         if (Input.GetMouseButtonDown(1))
         {
             if (disableCoroutine != null) StopCoroutine(disableCoroutine);

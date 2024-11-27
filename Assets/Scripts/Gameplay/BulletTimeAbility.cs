@@ -4,15 +4,39 @@ using UnityEngine;
 
 public class BulletTimeAbility : Ability
 {
-    // Start is called before the first frame update
+    private float slowDownFactor = 0.01f;
+    private float slowDownLenght = 15f;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public override void Activate()
+    {
+        Time.timeScale = slowDownFactor;
+        isActive = true;    
+    }
+
+    public override void ExecuteUpdate()
+    {
+        if (isActive && !PauseManager.isGamePaused)
+        {
+            if (Time.timeScale != 1)
+            {
+                Time.timeScale += (1 / slowDownLenght) * Time.unscaledDeltaTime;
+                Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1);
+            }
+            else
+            {
+                isActive = false;
+                Debug.Log(Time.timeScale);
+            }
+            PauseManager.prevTimeScale = Time.timeScale;
+        }
     }
 }

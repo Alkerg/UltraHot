@@ -13,6 +13,12 @@ public class Player : MonoBehaviour
     public AudioMixer audioMixer;
     public GameObject container;
     [SerializeField] public Transform groundCheck;
+    public bool isDropping = false;
+    public GameObject bulletPrefab;
+    public HealthBar healthBar;
+    public StaminaBar staminaBar;
+    public int Health { get { return health; } set{ health = value; } }
+    public int Stamina { get { return stamina; } set{ stamina = value; } }
 
     private CharacterController characterController;
     private const float gravity = -12f;
@@ -24,10 +30,7 @@ public class Player : MonoBehaviour
     private int stamina;
     private int maxStamina = 100;
 
-    public bool isDropping = false;
-    public GameObject bulletPrefab;
-    public HealthBar healthBar;
-    public StaminaBar staminaBar;
+
 
     private void Start()
     {
@@ -40,7 +43,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
+        if (PauseManager.isGamePaused) return;
+        
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if(isGrounded && velocity.y < 0) velocity.y = -2f;
@@ -48,7 +52,7 @@ public class Player : MonoBehaviour
         float X = Input.GetAxisRaw("Horizontal");   //Keys A,D
         float Z = Input.GetAxisRaw("Vertical");     //Keys W,S
 
-        if (Input.GetKeyDown(KeyCode.T))
+        /*if (Input.GetKeyDown(KeyCode.T))
         {
             if(!timeManager.isBulletTime)
             {
@@ -72,7 +76,7 @@ public class Player : MonoBehaviour
         {
             timeManager.TMPText.text = "Bullet time: Off";
             timeManager.isBulletTime = false;
-        }
+        }*/
 
         //Time.timeScale += (1 / slowDownLenght) * Time.unscaledDeltaTime;
         //Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1
@@ -80,7 +84,7 @@ public class Player : MonoBehaviour
 
         //Move the payer on the X and Z axes
         Vector3 move = transform.right * X + transform.forward * Z;
-        characterController.Move(move * speed * Time.unscaledDeltaTime); //Change Time.deltaTime to Time.unscaledDeltaTime for max payne bullet time mechanichs
+        characterController.Move(move * (speed * Time.unscaledDeltaTime)); //Change Time.deltaTime to Time.unscaledDeltaTime for max payne bullet time mechanichs
 
         //Moves the player on the Y axis
         if (Input.GetButtonDown("Jump") && isGrounded) velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
@@ -97,9 +101,13 @@ public class Player : MonoBehaviour
             health = 0;
             Debug.Log("Game over");
         }
-        else health -= damage;
-
+        else
+        {
+            health -= damage;
+            healthBar.SetHealth(health);
+        }
     }
+    
     IEnumerator Wait(float time)
     {
         //Return to normal speed temporarily

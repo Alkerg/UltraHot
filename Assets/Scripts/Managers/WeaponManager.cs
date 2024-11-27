@@ -18,6 +18,8 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.isGamePaused) return;
+        
         if (usingWeapons)
         {
             //Shoot bullets
