@@ -12,13 +12,9 @@ public class Selector : MonoBehaviour
     public WeaponManager weaponManager;
     public List<GameObject> abilityItems;
     public List<GameObject> weaponItems;
-    //private Vector2 mousePosition;
-    //private float currentAngle;
+
     private IteratorObjects<GameObject, Ability> iteratorAbilities;
     private IteratorObjects<GameObject, Weapon> iteratorWeapons;
-
-    //private int indexSelection;
-    //private int prevIndexSelection;
     private IEnumerator disableCoroutine;
 
     private void Awake()
@@ -52,6 +48,7 @@ public class Selector : MonoBehaviour
                 abilityItems[iteratorAbilities.GetCurrentIndex()].GetComponent<SelectorItem>().Select();    //Patch
                 weaponManager.ShowWeaponContainer(false);
                 abilityManager.ShowAbilityContainer(true);
+                weaponManager.ShowAmmoTMP(false);
 
             } else if (AbilityManager.usingAbilities)
             {
@@ -64,29 +61,11 @@ public class Selector : MonoBehaviour
                 weaponItems[iteratorWeapons.GetCurrentIndex()].GetComponent<SelectorItem>().Select();   //Patch
                 weaponManager.ShowWeaponContainer(true);
                 abilityManager.ShowAbilityContainer(false);
+                weaponManager.ShowAmmoTMP(true);
             }
 
             disableCoroutine = DisableSelectorAfterSeconds(2f);
             StartCoroutine(disableCoroutine);
-
-            /*activeAbilitySelector = !activeAbilitySelector;
-            activeWeaponSelector = !activeWeaponSelector;
-
-            AbilityManager.usingAbilities = !AbilityManager.usingAbilities;
-            WeaponManager.usingWeapons = !WeaponManager.usingWeapons;
-
-            abilitySelector.SetActive(activeAbilitySelector);
-            weaponSelector.SetActive(activeWeaponSelector);*/
-
-            /*if (activeAbilitySelector)
-            {
-                disableCoroutine = DisableSelectorAfterSeconds(2f);
-                StartCoroutine(disableCoroutine);
-            }
-            else
-            {
-                StopCoroutine(disableCoroutine);
-            }*/
         }
 
         
@@ -105,7 +84,7 @@ public class Selector : MonoBehaviour
                 activeWeaponSelector = true;
                 weaponSelector.SetActive(activeWeaponSelector);
                 iteratorWeapons.Next(); 
-                
+                weaponManager.UpdateTMP(iteratorWeapons.GetCurrentObject());
             }
 
             disableCoroutine = DisableSelectorAfterSeconds(2f);
@@ -128,20 +107,11 @@ public class Selector : MonoBehaviour
                 activeWeaponSelector = true;
                 weaponSelector.SetActive(activeWeaponSelector);
                 iteratorWeapons.Previous();
+                weaponManager.UpdateTMP(iteratorWeapons.GetCurrentObject());
             }
 
             disableCoroutine = DisableSelectorAfterSeconds(2f);
             StartCoroutine(disableCoroutine);
-
-        }
-
-
-        if (activeAbilitySelector)
-        {
-           /* mousePosition = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
-            currentAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
-            currentAngle = (currentAngle + 360) % 360;
-            indexSelection = (int)currentAngle / 90;*/
 
         }
     }

@@ -62,6 +62,11 @@ public class WeaponManager : MonoBehaviour
         weaponContainer.SetActive(show);
     }
 
+    public void ShowAmmoTMP(bool show)
+    {
+        ammoTMP.gameObject.SetActive(show);
+    }
+
     public void UpdateTMP(Weapon weapon)
     {
         ammoTMP.text = weapon.currentBullets.ToString() + "/" + weapon.ammo.ToString();
