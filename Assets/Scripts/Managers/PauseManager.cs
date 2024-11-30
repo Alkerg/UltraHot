@@ -28,11 +28,12 @@ public class PauseManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        Debug.Log(Time.timeScale);
+        //Debug.Log(Time.timeScale);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
@@ -45,6 +46,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = isGamePaused ? 0 : prevTimeScale;
         pauseMenuPanel.SetActive(isGamePaused);
         Cursor.visible = isGamePaused;
+        Cursor.lockState = isGamePaused ? CursorLockMode.None : CursorLockMode.Locked;
 
     }
 
@@ -54,6 +56,7 @@ public class PauseManager : MonoBehaviour
         isGamePaused = false;
         Time.timeScale = prevTimeScale;
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ExitLevel()

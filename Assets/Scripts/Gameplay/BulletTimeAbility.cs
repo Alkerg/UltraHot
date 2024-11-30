@@ -33,10 +33,15 @@ public class BulletTimeAbility : Ability
             }
             else
             {
-                isActive = false;
-                Debug.Log(Time.timeScale);
+                Deactivate();
             }
             PauseManager.prevTimeScale = Time.timeScale;
         }
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
+        //Debug.Log(Time.timeScale);
     }
 }

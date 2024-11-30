@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class AbilityExecutor : MonoBehaviour
 {
-    public Ability ability;
+    public List<Ability> abilities = new List<Ability>();
     void Update()
     {
-        if (ability.isActive && ability != null)
+        if (abilities.Count == 0) return;
+        
+        for(int i=0; i<abilities.Count; i++)    // plain loop to prevent iterator errors
         {
-            ability.ExecuteUpdate();
+            if (abilities[i] != null)
+            {
+                if (abilities[i].isActive)
+                {
+                    abilities[i].ExecuteUpdate();
+                }else if (!abilities[i].isActive)
+                {
+                    abilities.Remove(abilities[i]);
+                }
+            }
         }
+
     }
 }
