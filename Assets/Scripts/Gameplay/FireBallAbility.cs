@@ -19,7 +19,9 @@ public class FireBallAbility : Ability
         targetEnemy = enemy;
         counter = duration;
         enemy.TakeDamage(damage);
+        targetEnemy.navMeshAgent.isStopped = true;
         enemy.ChangeState(new StunState());
+        enemy.animator.SetBool("beingBurned",true);
     }
 
     public override void ExecuteUpdate()
@@ -37,5 +39,6 @@ public class FireBallAbility : Ability
         isActive = false;
         targetEnemy.navMeshAgent.isStopped = false;
         targetEnemy.ChangeState(new ChasingPlayerState());
+        targetEnemy.animator.SetBool("beingBurned",false);
     }
 }

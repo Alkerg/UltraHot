@@ -40,6 +40,7 @@ public class AbilityManager : MonoBehaviour
                     if (!currentAbility.targetRequired)
                     {
                         currentAbility.Activate();
+                        TakeStamina(currentAbility.staminaRequired);
                     }
                     else if(currentAbility.targetRequired)
                     {
@@ -52,13 +53,12 @@ public class AbilityManager : MonoBehaviour
                             if (raycastHit.transform.TryGetComponent(out enemyAffected))
                             {
                                 Debug.Log("Enemy script");
+                                currentAbility.Activate(enemyAffected);
+                                TakeStamina(currentAbility.staminaRequired);
                             }
-                        
-                            currentAbility.Activate(enemyAffected);
                         }
                     }
                 
-                    TakeStamina(currentAbility.staminaRequired);
                 }
                 
             }

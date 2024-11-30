@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
     public Player player;
     public NavMeshAgent navMeshAgent;
+    public Animator animator;
+    public GameObject VFXContainer;
+    public GameObject BurningFX;
+    public GameObject ElectricityFX;
     
     private IEnemyState currentState;
     private float health = 100;
