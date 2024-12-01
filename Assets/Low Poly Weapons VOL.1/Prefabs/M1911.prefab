@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 4952727429218122}
   - component: {fileID: 1552713219278274099}
   - component: {fileID: 6576212923623149641}
-  - component: {fileID: 4170675640453929845}
+  - component: {fileID: 7752787430771063311}
   m_Layer: 0
   m_Name: M1911
   m_TagString: Untagged
@@ -281,7 +281,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.052786764, y: 0.16379848, z: 0.27054346}
   m_Center: {x: 0.0012174546, y: -0.028414804, z: -0.026850125}
---- !u!114 &4170675640453929845
+--- !u!114 &7752787430771063311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -290,9 +290,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1694449805434718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1163b00676b745f46adffbb6777e68ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 04799df7fe93c744c8d93460149dd24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: Pistol
+  ammo: 25
+  currentBullets: 10
+  maxCurrentBullets: 10
 --- !u!1 &1748277932983872
 GameObject:
   m_ObjectHideFlags: 0
