@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
 
     public void Reload()
     {
-        if (currentBullets < maxCurrentBullets)
+        if (currentBullets < maxCurrentBullets && ammo > 0)
         {
             float bulletsToReload = maxCurrentBullets - currentBullets;
             ammo -= bulletsToReload;
