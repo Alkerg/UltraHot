@@ -33,12 +33,12 @@ public class AbilityManager : MonoBehaviour
             {
                 Ability currentAbility =  selector.getIteratorAbilities().GetCurrentObject();
                 
-                if (currentAbility.staminaRequired < player.Stamina && !currentAbility.isActive)
+                if (currentAbility.staminaRequired < player.Stamina )
                 {
-                    abilityExecutor.abilities.Add(currentAbility);
 
-                    if (!currentAbility.targetRequired)
+                    if (!currentAbility.targetRequired && !currentAbility.isActive)
                     {
+                        abilityExecutor.AddAbility(currentAbility,null);
                         currentAbility.Activate();
                         TakeStamina(currentAbility.staminaRequired);
                     }
@@ -50,13 +50,13 @@ public class AbilityManager : MonoBehaviour
                         {
                             Enemy enemyAffected = null;
                             Debug.Log(raycastHit.transform.gameObject.name);
-                            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * targetDistance, Color.green,1);
                             if (raycastHit.transform.TryGetComponent(out enemyAffected))
                             {
                                 if (AvailableToAddEffect(enemyAffected))
                                 {
                                     Debug.Log("Enemy script");
-                                    currentAbility.Activate(enemyAffected);
+                                    //currentAbility.Activate(enemyAffected);
+                                    abilityExecutor.AddAbility(currentAbility, enemyAffected);
                                     enemyAffected.abilityAffecting = currentAbility;
                                     TakeStamina(currentAbility.staminaRequired);
                                 }

@@ -14,4 +14,5 @@ public class Ability : MonoBehaviour
     public virtual void Activate(Enemy enemy) { }
     public virtual void Activate() { }
     public virtual void ExecuteUpdate() { }
+    public virtual void Deactivate() { }
 }

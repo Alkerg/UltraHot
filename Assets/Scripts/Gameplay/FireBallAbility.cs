@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FireBallAbility : Ability
 {
-    public float counter;
+    private float counter;
     private Enemy targetEnemy;
     
     void Start()
@@ -34,7 +34,7 @@ public class FireBallAbility : Ability
         }
     }
 
-    public void Deactivate()
+    public override void Deactivate()
     {
         isActive = false;
         targetEnemy.navMeshAgent.isStopped = false;

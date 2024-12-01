@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElectroshockAbility : Ability
 {
-    public float counter;
+    private float counter;
     private Enemy targetEnemy;
     
     public override void Activate(Enemy enemy)
@@ -28,7 +28,7 @@ public class ElectroshockAbility : Ability
         }
     }
 
-    public void Deactivate()
+    public override void Deactivate()
     {
         isActive = false;
         targetEnemy.navMeshAgent.isStopped = false;

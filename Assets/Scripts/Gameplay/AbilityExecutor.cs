@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class AbilityExecutor : MonoBehaviour
 {
-    public List<Ability> abilities = new List<Ability>();
+    //public List<Ability> abilities = new List<Ability>();
+    public List<AbilityInstance> activeAbilities = new List<AbilityInstance>();
+
     void Update()
     {
-        if (abilities.Count == 0) return;
+        if (activeAbilities.Count == 0) return;
         
-        for(int i=0; i<abilities.Count; i++)    // plain loop to prevent iterator errors
+        float deltaTime = Time.deltaTime;
+        for (int i = activeAbilities.Count - 1; i >= 0; i--)
         {
-            if (abilities[i] != null)
+            if (activeAbilities[i].Update(deltaTime))
             {
-                if (abilities[i].isActive)
-                {
-                    abilities[i].ExecuteUpdate();
-                }else if (!abilities[i].isActive)
-                {
-                    abilities.Remove(abilities[i]);
-                }
-                
+                activeAbilities.RemoveAt(i);
             }
         }
-
+    }
+    
+    public void AddAbility(Ability ability, Enemy enemyTarget)
+    {
+        activeAbilities.Add(new AbilityInstance(ability, enemyTarget));
     }
 }
