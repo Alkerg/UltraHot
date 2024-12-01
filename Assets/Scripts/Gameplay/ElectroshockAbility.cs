@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElectroshockAbility : Ability
 {
-    private float counter;
+    public float counter;
     private Enemy targetEnemy;
     
     public override void Activate(Enemy enemy)
@@ -20,7 +20,7 @@ public class ElectroshockAbility : Ability
 
     public override void ExecuteUpdate()
     {
-        counter -= Time.unscaledDeltaTime;
+        counter -= Time.deltaTime;
         
         if (counter <= 0)
         {

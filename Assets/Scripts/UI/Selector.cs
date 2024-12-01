@@ -28,7 +28,6 @@ public class Selector : MonoBehaviour
         activeAbilitySelector = false;
         activeWeaponSelector = false;
         weaponManager.UpdateTMP(iteratorWeapons.GetCurrentObject());
-        //disableCoroutine = DisableSelectorAfterSeconds(2f);
     }
 
     private void Update()

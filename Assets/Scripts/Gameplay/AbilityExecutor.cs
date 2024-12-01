@@ -20,6 +20,7 @@ public class AbilityExecutor : MonoBehaviour
                 {
                     abilities.Remove(abilities[i]);
                 }
+                
             }
         }
 

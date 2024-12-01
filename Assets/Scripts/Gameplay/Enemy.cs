@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public GameObject VFXContainer;
     public GameObject BurningFX;
     public GameObject ElectricityFX;
+    public Ability abilityAffecting;
     
     private IEnemyState currentState;
     private float health = 100;
@@ -25,6 +26,11 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+
+        if (abilityAffecting != null)
+        {
+            if (!abilityAffecting.isActive) abilityAffecting = null;
+        }
     }
 
     public void ChangeState(IEnemyState newState)

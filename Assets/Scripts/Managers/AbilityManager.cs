@@ -45,6 +45,7 @@ public class AbilityManager : MonoBehaviour
                     else if(currentAbility.targetRequired)
                     {
                         float targetDistance = 30f;
+                        
                         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit raycastHit, targetDistance, targetLayerMask))
                         {
                             Enemy enemyAffected = null;
@@ -52,9 +53,13 @@ public class AbilityManager : MonoBehaviour
                             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * targetDistance, Color.green,1);
                             if (raycastHit.transform.TryGetComponent(out enemyAffected))
                             {
-                                Debug.Log("Enemy script");
-                                currentAbility.Activate(enemyAffected);
-                                TakeStamina(currentAbility.staminaRequired);
+                                if (AvailableToAddEffect(enemyAffected))
+                                {
+                                    Debug.Log("Enemy script");
+                                    currentAbility.Activate(enemyAffected);
+                                    enemyAffected.abilityAffecting = currentAbility;
+                                    TakeStamina(currentAbility.staminaRequired);
+                                }
                             }
                         }
                     }
@@ -64,6 +69,12 @@ public class AbilityManager : MonoBehaviour
             }
         }
         
+    }
+
+    public bool AvailableToAddEffect(Enemy enemy)
+    {
+        if (enemy.abilityAffecting == null) return true;
+        return false;
     }
     
     public void ShowAbilityContainer(bool show)

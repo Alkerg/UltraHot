@@ -45,7 +45,7 @@ public class WeaponManager : MonoBehaviour
             }
             
             //Drop weapon
-            if (Input.GetKey(KeyCode.F))
+            /*if (Input.GetKey(KeyCode.F))
             {
                 Weapon weapon = selector.getIteratorWeapons().GetCurrentObject();
                 if (weapon)
@@ -55,7 +55,7 @@ public class WeaponManager : MonoBehaviour
                     StartCoroutine(Wait(.04f, Time.timeScale));
                 }
 
-            }
+            }*/
         }
     }
 
