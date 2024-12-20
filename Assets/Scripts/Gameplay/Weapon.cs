@@ -8,18 +8,17 @@ public class Weapon : MonoBehaviour
     public float ammo;
     public float currentBullets;
     public float maxCurrentBullets;
+    public AudioClip shootSFX;
+    public AudioClip reloadSFX;
     
+    private AudioSource audioSource;
     private Rigidbody rb;
     private float dropForce = 10;
     
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
-    }
-
-    private void Update()
-    {
-        
     }
     
     public void Shoot()
@@ -31,7 +30,7 @@ public class Weapon : MonoBehaviour
             bullet.transform.position = Camera.main.transform.position + offset;
             bullet.transform.rotation = Camera.main.transform.rotation;
             currentBullets -= 1;
-            Debug.Log("Current bullets: " + currentBullets + "  Ammo: " + ammo);
+            audioSource.PlayOneShot(shootSFX);
         }
 
     }
@@ -41,25 +40,18 @@ public class Weapon : MonoBehaviour
         if (currentBullets < maxCurrentBullets && ammo > 0)
         {
             float bulletsToReload = maxCurrentBullets - currentBullets;
-            ammo -= bulletsToReload;
-            currentBullets += bulletsToReload;
-            Debug.Log("Current bullets: " + currentBullets + "  Ammo: " + ammo);
+            if (ammo < bulletsToReload)
+            {
+                currentBullets += ammo;
+                ammo = 0;
+            }
+            else
+            {
+                ammo -= bulletsToReload;
+                currentBullets += bulletsToReload;
+            }
+            audioSource.PlayOneShot(reloadSFX);
         }
-    }
-    
-    public void SeparateFromParent()
-    {
-        transform.SetParent(null);
-    }
-    
-    public void Drop()
-    {
-        SeparateFromParent();
-        rb.isKinematic = false; //must be 'false' to apply physics
-        rb.interpolation = RigidbodyInterpolation.Interpolate;  //must be changed to 'interpolate' to avoid lagging
-        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;  //must be changed to 'continuous' to avoid collision bugs
-        //rb.AddForce(transform.forward * dropForce, ForceMode.Impulse);
-        rb.AddForce(Camera.main.transform.forward * dropForce, ForceMode.Impulse);    
     }
     
 }

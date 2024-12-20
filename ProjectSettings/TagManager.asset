@@ -7,6 +7,12 @@ TagManager:
   - RedGuy
   - Bullet
   - Enemy
+  - Potion
+  - PistolAmmo
+  - ShotGunAmmo
+  - FAK
+  - LootBox
+  - Manager
   layers:
   - Default
   - TransparentFX
@@ -16,7 +22,7 @@ TagManager:
   - UI
   - Ground
   - Enemy
-  - 
+  - Roof
   - 
   - 
   - 

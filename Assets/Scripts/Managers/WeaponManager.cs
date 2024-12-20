@@ -18,7 +18,7 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
-        if (PauseManager.isGamePaused) return;
+        if (PauseManager.isGamePaused || LevelManager.isGameOver || LevelManager.isGameFinished) return;
         
         if (usingWeapons)
         {
@@ -43,19 +43,6 @@ public class WeaponManager : MonoBehaviour
                     UpdateTMP(weapon);
                 }
             }
-            
-            //Drop weapon
-            /*if (Input.GetKey(KeyCode.F))
-            {
-                Weapon weapon = selector.getIteratorWeapons().GetCurrentObject();
-                if (weapon)
-                {
-                    weapon.Drop();
-                    weapons.Remove(weapon);
-                    StartCoroutine(Wait(.04f, Time.timeScale));
-                }
-
-            }*/
         }
     }
 

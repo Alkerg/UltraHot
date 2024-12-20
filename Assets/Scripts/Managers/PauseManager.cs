@@ -33,7 +33,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Time.timeScale);
+        if(LevelManager.isGameOver) return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
@@ -47,7 +47,6 @@ public class PauseManager : MonoBehaviour
         pauseMenuPanel.SetActive(isGamePaused);
         Cursor.visible = isGamePaused;
         Cursor.lockState = isGamePaused ? CursorLockMode.None : CursorLockMode.Locked;
-
     }
 
     public void ResumeGame()

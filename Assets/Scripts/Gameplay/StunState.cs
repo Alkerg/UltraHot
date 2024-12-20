@@ -7,7 +7,7 @@ public class StunState : IEnemyState
 {
     public void EnterState(Enemy enemy)
     {
-        
+
     }
 
     public void UpdateState(Enemy enemy)

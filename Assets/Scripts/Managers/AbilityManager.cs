@@ -25,7 +25,7 @@ public class AbilityManager : MonoBehaviour
 
     void Update()
     {
-        if (PauseManager.isGamePaused) return;
+        if (PauseManager.isGamePaused || LevelManager.isGameOver || LevelManager.isGameFinished) return;
         
         if (usingAbilities)
         {
@@ -38,8 +38,9 @@ public class AbilityManager : MonoBehaviour
 
                     if (!currentAbility.targetRequired && !currentAbility.isActive)
                     {
-                        abilityExecutor.AddAbility(currentAbility,null);
+                        //abilityExecutor.AddAbility(currentAbility,null);
                         currentAbility.Activate();
+                        abilityExecutor.activeAbilities.Add(currentAbility);
                         TakeStamina(currentAbility.staminaRequired);
                     }
                     else if(currentAbility.targetRequired)
@@ -49,14 +50,12 @@ public class AbilityManager : MonoBehaviour
                         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit raycastHit, targetDistance, targetLayerMask))
                         {
                             Enemy enemyAffected = null;
-                            Debug.Log(raycastHit.transform.gameObject.name);
                             if (raycastHit.transform.TryGetComponent(out enemyAffected))
                             {
-                                if (AvailableToAddEffect(enemyAffected))
+                                if (AvailableToAddEffect(enemyAffected) && !currentAbility.isActive)
                                 {
-                                    Debug.Log("Enemy script");
-                                    //currentAbility.Activate(enemyAffected);
-                                    abilityExecutor.AddAbility(currentAbility, enemyAffected);
+                                    currentAbility.Activate(enemyAffected);
+                                    abilityExecutor.activeAbilities.Add(currentAbility);
                                     enemyAffected.abilityAffecting = currentAbility;
                                     TakeStamina(currentAbility.staminaRequired);
                                 }

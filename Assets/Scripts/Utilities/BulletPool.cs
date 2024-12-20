@@ -5,8 +5,8 @@ using UnityEngine;
 public class BulletPool : MonoBehaviour
 {
     public static BulletPool Instance { get { return instance; } }
-    public int poolSizePistol = 20;
-    public int poolSizeShotGun = 20;
+    public int poolSizePistol = 30;
+    public int poolSizeShotGun = 30;
     public GameObject bulletPrefab;
 
     private static BulletPool instance;

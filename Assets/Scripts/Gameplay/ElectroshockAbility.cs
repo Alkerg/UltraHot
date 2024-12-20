@@ -22,6 +22,11 @@ public class ElectroshockAbility : Ability
     {
         counter -= Time.deltaTime;
         
+        if (targetEnemy.Health <= 0)
+        {
+            isActive = false;
+            targetEnemy.ChangeState(new DeadState());
+        }
         if (counter <= 0)
         {
             Deactivate();

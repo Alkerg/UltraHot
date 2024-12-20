@@ -23,8 +23,18 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             trailRenderer.Clear();
-            gameObject.SetActive(false);
             collision.GetComponent<Enemy>().TakeDamage(damage);
+            gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.CompareTag("LootBox"))
+        {
+            trailRenderer.Clear();
+            collision.GetComponent<LootBox>().TakeDamage(damage);
+            gameObject.SetActive(false);
+        }else
+        {
+            trailRenderer.Clear();
+            gameObject.SetActive(false);
         }
     }
 

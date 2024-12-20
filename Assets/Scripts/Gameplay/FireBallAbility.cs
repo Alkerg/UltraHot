@@ -28,6 +28,11 @@ public class FireBallAbility : Ability
     {
         counter -= Time.deltaTime;
         
+        if (targetEnemy.Health <= 0)
+        {
+            isActive = false;
+            targetEnemy.ChangeState(new DeadState());
+        }
         if (counter <= 0)
         {
             Deactivate();
@@ -40,6 +45,5 @@ public class FireBallAbility : Ability
         targetEnemy.navMeshAgent.isStopped = false;
         targetEnemy.ChangeState(new ChasingPlayerState());
         targetEnemy.animator.SetBool("beingBurned",false);
-        Debug.Log("Fireball desactivado");
     }
 }

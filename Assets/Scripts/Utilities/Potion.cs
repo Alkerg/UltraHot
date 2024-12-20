@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
-    private float stamina = 25f;
+    [SerializeField] private int stamina = 25;
 
-    public float getStamina()
+    public int getStamina()
     {
         return stamina;
     }
+    
 }

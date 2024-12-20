@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -19,7 +19,9 @@ public class Player : MonoBehaviour
     public StaminaBar staminaBar;
     public int Health { get { return health; } set{ health = value; } }
     public int Stamina { get { return stamina; } set{ stamina = value; } }
-
+    public int MaxHealth { get { return maxHealth; } }
+    public int MaxStamina { get { return maxStamina; } }
+    
     private CharacterController characterController;
     private const float gravity = -12f;
     private Vector3 velocity;
@@ -43,7 +45,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (PauseManager.isGamePaused) return;
+        if (PauseManager.isGamePaused || LevelManager.isGameOver || LevelManager.isGameFinished) return;
         
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -51,37 +53,7 @@ public class Player : MonoBehaviour
 
         float X = Input.GetAxisRaw("Horizontal");   //Keys A,D
         float Z = Input.GetAxisRaw("Vertical");     //Keys W,S
-
-        /*if (Input.GetKeyDown(KeyCode.T))
-        {
-            if(!timeManager.isBulletTime)
-            {
-                timeManager.ActivateBulletTime();
-                Debug.Log("activado");
-            }
-            else
-            {
-                timeManager.DeactivateBulletTime();
-                Debug.Log("desactivado");
-            }
-
-        }
-
-        if (Time.timeScale != 1)
-        {
-            Time.timeScale += (1 / slowDownLenght) * Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1);
-        }
-        else
-        {
-            timeManager.TMPText.text = "Bullet time: Off";
-            timeManager.isBulletTime = false;
-        }*/
-
-        //Time.timeScale += (1 / slowDownLenght) * Time.unscaledDeltaTime;
-        //Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1
-        //Time.fixedDeltaTime = Time.timeScale * 0.02f;
-
+        
         //Move the payer on the X and Z axes
         Vector3 move = transform.right * X + transform.forward * Z;
         characterController.Move(move * (speed * Time.unscaledDeltaTime)); //Change Time.deltaTime to Time.unscaledDeltaTime for max payne bullet time mechanichs
@@ -101,11 +73,9 @@ public class Player : MonoBehaviour
             health = 0;
             Debug.Log("Game over");
         }
-        else
-        {
-            health -= damage;
-            healthBar.SetHealth(health);
-        }
+        else health -= damage;
+            
+        healthBar.SetHealth(health);
     }
     
     IEnumerator Wait(float time)

@@ -632,8 +632,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: db7f13605a248334a9c7c7245f299c30, type: 2}
-  m_sharedMaterial: {fileID: -1860691961757909656, guid: db7f13605a248334a9c7c7245f299c30, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e2d4c27b24206244bb5ffab717f5769b, type: 2}
+  m_sharedMaterial: {fileID: -1860691961757909656, guid: e2d4c27b24206244bb5ffab717f5769b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -912,8 +912,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: db7f13605a248334a9c7c7245f299c30, type: 2}
-  m_sharedMaterial: {fileID: -1860691961757909656, guid: db7f13605a248334a9c7c7245f299c30, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e2d4c27b24206244bb5ffab717f5769b, type: 2}
+  m_sharedMaterial: {fileID: -1860691961757909656, guid: e2d4c27b24206244bb5ffab717f5769b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1258,7 +1258,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2074922912}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1087040654}
+        m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2074922912
 MonoBehaviour:
   m_ObjectHideFlags: 0
