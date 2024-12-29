@@ -10,15 +10,25 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public Animator animator;
     public GameObject VFXContainer;
+    public VisualEffect burningVFX;
+    public VisualEffect electricityVFX;
     public GameObject BurningFX;
     public GameObject ElectricityFX;
     public Ability abilityAffecting;
-    
+    public float Health {get { return health;}}
+
+    private bool isDead;
     private IEnemyState currentState;
     private float health = 100;
+    private LevelManager levelManager;
+    
     void Start()
     {
+        electricityVFX.Stop();
+        burningVFX.Stop();
+        levelManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<LevelManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        isDead = false;
         navMeshAgent = GetComponent<NavMeshAgent>();
         ChangeState(new ChasingPlayerState());
     }
@@ -46,10 +56,20 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
-            gameObject.SetActive(false);
+            levelManager.enemiesAlive -= 1;
+            AddStaminaToPlayer(2);
+            isDead = true;
         }
+    }
+    
+    public void AddStaminaToPlayer(int stamina)
+    {
+        if (player.Stamina + stamina <= player.MaxStamina) player.Stamina += stamina;
+        else player.Stamina = player.MaxStamina;
+        player.staminaBar.SetStamina(player.Stamina);
+        
     }
     
 }

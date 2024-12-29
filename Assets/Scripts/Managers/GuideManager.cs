@@ -10,7 +10,7 @@ public class GuideManager : MonoBehaviour
     public TextMeshProUGUI titleMessageTMP;
     public TextMeshProUGUI guideMessageTMP;
 
-    private float duration = 3f;
+    private float duration = 2.5f;
     void Start()
     {
         

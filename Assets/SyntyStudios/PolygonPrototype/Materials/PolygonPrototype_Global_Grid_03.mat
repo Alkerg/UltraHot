@@ -49,7 +49,7 @@ Material:
     - _QueueOffset: 0
     - __dirty: 0
     m_Colors:
-    - _BaseColor: {r: 0.41176474, g: 0.49803925, b: 0.7686275, a: 0}
+    - _BaseColor: {r: 0, g: 0.033692725, b: 0.14150941, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6039644481290740015
 MonoBehaviour:

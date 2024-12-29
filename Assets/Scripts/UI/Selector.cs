@@ -12,17 +12,16 @@ public class Selector : MonoBehaviour
     public WeaponManager weaponManager;
     public List<GameObject> abilityItems;
     public List<GameObject> weaponItems;
-
+    public AudioClip iterateSound;
+        
     private IteratorObjects<GameObject, Ability> iteratorAbilities;
     private IteratorObjects<GameObject, Weapon> iteratorWeapons;
     private IEnumerator disableCoroutine;
+    private AudioSource audioSource;
 
-    private void Awake()
-    {
-        
-    }
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         iteratorAbilities = new IteratorObjects<GameObject, Ability>(abilityItems, abilityManager.abilities);
         iteratorWeapons = new IteratorObjects<GameObject, Weapon>(weaponItems, weaponManager.weapons);
         activeAbilitySelector = false;
@@ -32,7 +31,7 @@ public class Selector : MonoBehaviour
 
     private void Update()
     {
-        if (PauseManager.isGamePaused) return;
+        if (PauseManager.isGamePaused || LevelManager.isGameOver || LevelManager.isGameFinished) return;
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -72,6 +71,7 @@ public class Selector : MonoBehaviour
         
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
+            audioSource.PlayOneShot(iterateSound);
             if (disableCoroutine != null) StopCoroutine(disableCoroutine);
 
             if (AbilityManager.usingAbilities)
@@ -95,6 +95,7 @@ public class Selector : MonoBehaviour
 
         if(Input.GetAxis("Mouse ScrollWheel") < 0)
         {
+            audioSource.PlayOneShot(iterateSound);
             if (disableCoroutine != null) StopCoroutine(disableCoroutine); 
 
             if (AbilityManager.usingAbilities)
@@ -132,7 +133,6 @@ public class Selector : MonoBehaviour
             activeWeaponSelector = false;
             weaponSelector.SetActive(activeWeaponSelector);
         }
-
         
     }
     IEnumerator wait(float time)

@@ -17,7 +17,7 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        if (PauseManager.isGamePaused) return;
+        if (PauseManager.isGamePaused || LevelManager.isGameOver || LevelManager.isGameFinished) return;
         
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.unscaledDeltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.unscaledDeltaTime;

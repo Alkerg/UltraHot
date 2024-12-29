@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FireBallAbility : Ability
 {
-    public float counter;
+    private float counter;
     private Enemy targetEnemy;
     
     void Start()
@@ -22,24 +22,31 @@ public class FireBallAbility : Ability
         targetEnemy.navMeshAgent.isStopped = true;
         enemy.ChangeState(new StunState());
         enemy.animator.SetBool("beingBurned",true);
+        enemy.burningVFX.Reinit();
+        enemy.burningVFX.Play();
     }
 
     public override void ExecuteUpdate()
     {
         counter -= Time.deltaTime;
         
+        if (targetEnemy.Health <= 0)
+        {
+            isActive = false;
+            targetEnemy.ChangeState(new DeadState());
+        }
         if (counter <= 0)
         {
             Deactivate();
         }
     }
 
-    public void Deactivate()
+    public override void Deactivate()
     {
         isActive = false;
         targetEnemy.navMeshAgent.isStopped = false;
         targetEnemy.ChangeState(new ChasingPlayerState());
         targetEnemy.animator.SetBool("beingBurned",false);
-        Debug.Log("Fireball desactivado");
+        targetEnemy.burningVFX.Stop();
     }
 }

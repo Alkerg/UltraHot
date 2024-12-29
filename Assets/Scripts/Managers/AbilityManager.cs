@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AbilityManager : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class AbilityManager : MonoBehaviour
 
     void Update()
     {
-        if (PauseManager.isGamePaused) return;
+        if (PauseManager.isGamePaused || LevelManager.isGameOver || LevelManager.isGameFinished) return;
         
         if (usingAbilities)
         {
@@ -33,13 +34,14 @@ public class AbilityManager : MonoBehaviour
             {
                 Ability currentAbility =  selector.getIteratorAbilities().GetCurrentObject();
                 
-                if (currentAbility.staminaRequired < player.Stamina && !currentAbility.isActive)
+                if (currentAbility.staminaRequired < player.Stamina )
                 {
-                    abilityExecutor.abilities.Add(currentAbility);
 
-                    if (!currentAbility.targetRequired)
+                    if (!currentAbility.targetRequired && !currentAbility.isActive)
                     {
+                        //abilityExecutor.AddAbility(currentAbility,null);
                         currentAbility.Activate();
+                        abilityExecutor.activeAbilities.Add(currentAbility);
                         TakeStamina(currentAbility.staminaRequired);
                     }
                     else if(currentAbility.targetRequired)
@@ -49,14 +51,12 @@ public class AbilityManager : MonoBehaviour
                         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit raycastHit, targetDistance, targetLayerMask))
                         {
                             Enemy enemyAffected = null;
-                            Debug.Log(raycastHit.transform.gameObject.name);
-                            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * targetDistance, Color.green,1);
                             if (raycastHit.transform.TryGetComponent(out enemyAffected))
                             {
-                                if (AvailableToAddEffect(enemyAffected))
+                                if (AvailableToAddEffect(enemyAffected) && !currentAbility.isActive)
                                 {
-                                    Debug.Log("Enemy script");
                                     currentAbility.Activate(enemyAffected);
+                                    abilityExecutor.activeAbilities.Add(currentAbility);
                                     enemyAffected.abilityAffecting = currentAbility;
                                     TakeStamina(currentAbility.staminaRequired);
                                 }
