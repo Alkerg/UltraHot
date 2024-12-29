@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ElectroshockAbility : Ability
 {
@@ -16,6 +17,9 @@ public class ElectroshockAbility : Ability
         targetEnemy.navMeshAgent.isStopped = true;
         enemy.ChangeState(new StunState());
         enemy.animator.SetBool("beingElectrocuted",true);
+        //VisualEffect vfx = Instantiate(enemy.ElectricityFX,  enemy.VFXContainer.transform.position,Quaternion.identity).GetComponent<VisualEffect>();
+        enemy.electricityVFX.Reinit();
+        enemy.electricityVFX.Play();
     }
 
     public override void ExecuteUpdate()
@@ -39,5 +43,6 @@ public class ElectroshockAbility : Ability
         targetEnemy.navMeshAgent.isStopped = false;
         targetEnemy.ChangeState(new ChasingPlayerState());
         targetEnemy.animator.SetBool("beingElectrocuted",false);
+        targetEnemy.electricityVFX.Stop();
     }
 }

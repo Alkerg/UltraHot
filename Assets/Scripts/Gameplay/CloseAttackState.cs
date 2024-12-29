@@ -22,7 +22,7 @@ public class CloseAttackState : IEnemyState
         
         float distanceToPlayer = Vector3.Distance(enemy.player.transform.position, enemy.transform.position);
         
-        if (distanceToPlayer > 2f)
+        if (distanceToPlayer > 2.5f)
         {
             enemy.ChangeState(new ChasingPlayerState());
         }

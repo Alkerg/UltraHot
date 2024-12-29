@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        audioMixer.SetFloat("Pitch", 0.776f);
         audioMixer.SetFloat("SFXVolume", 0f);
         audioMixer.SetFloat("MusicVolume", 0f);
     }

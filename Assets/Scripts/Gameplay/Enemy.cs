@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public Animator animator;
     public GameObject VFXContainer;
+    public VisualEffect burningVFX;
+    public VisualEffect electricityVFX;
     public GameObject BurningFX;
     public GameObject ElectricityFX;
     public Ability abilityAffecting;
@@ -22,6 +24,8 @@ public class Enemy : MonoBehaviour
     
     void Start()
     {
+        electricityVFX.Stop();
+        burningVFX.Stop();
         levelManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<LevelManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         isDead = false;

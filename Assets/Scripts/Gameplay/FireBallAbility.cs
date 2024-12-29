@@ -22,6 +22,8 @@ public class FireBallAbility : Ability
         targetEnemy.navMeshAgent.isStopped = true;
         enemy.ChangeState(new StunState());
         enemy.animator.SetBool("beingBurned",true);
+        enemy.burningVFX.Reinit();
+        enemy.burningVFX.Play();
     }
 
     public override void ExecuteUpdate()
@@ -45,5 +47,6 @@ public class FireBallAbility : Ability
         targetEnemy.navMeshAgent.isStopped = false;
         targetEnemy.ChangeState(new ChasingPlayerState());
         targetEnemy.animator.SetBool("beingBurned",false);
+        targetEnemy.burningVFX.Stop();
     }
 }

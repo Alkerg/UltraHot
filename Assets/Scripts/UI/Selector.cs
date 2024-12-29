@@ -18,11 +18,7 @@ public class Selector : MonoBehaviour
     private IteratorObjects<GameObject, Weapon> iteratorWeapons;
     private IEnumerator disableCoroutine;
     private AudioSource audioSource;
-    
-    private void Awake()
-    {
-        
-    }
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();

@@ -31,7 +31,12 @@ public class Bullet : MonoBehaviour
             trailRenderer.Clear();
             collision.GetComponent<LootBox>().TakeDamage(damage);
             gameObject.SetActive(false);
-        }else
+        }else if (collision.gameObject.CompareTag("ExplosiveBarrel"))
+        {
+            trailRenderer.Clear();
+            collision.GetComponent<ExplosiveBarrel>().Explode();
+            gameObject.SetActive(false);
+        }
         {
             trailRenderer.Clear();
             gameObject.SetActive(false);

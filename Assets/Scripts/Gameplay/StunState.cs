@@ -7,7 +7,7 @@ public class StunState : IEnemyState
 {
     public void EnterState(Enemy enemy)
     {
-
+        enemy.GetComponent<Outline>().enabled = true;
     }
 
     public void UpdateState(Enemy enemy)
@@ -17,6 +17,6 @@ public class StunState : IEnemyState
 
     public void ExitState(Enemy enemy)
     {
-        
+        enemy.GetComponent<Outline>().enabled = false;
     }
 }

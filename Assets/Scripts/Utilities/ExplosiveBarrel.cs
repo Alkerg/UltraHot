@@ -8,17 +8,9 @@ public class ExplosiveBarrel : MonoBehaviour
     public float explosionRadius;
     public float damage;
 
-    private void OnTriggerEnter(Collider other)
+    public void Explode()
     {
-        if (other.CompareTag("Bullet"))
-        {
-            Instantiate(explosion,transform.position,Quaternion.Euler(-90f,0f,0f));
-            Explode();
-        }
-    }
-
-    private void Explode()
-    {
+        Instantiate(explosion,transform.position,Quaternion.Euler(-90f,0f,0f));
         Collider[] objectsAffected = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider obj in objectsAffected)
         {

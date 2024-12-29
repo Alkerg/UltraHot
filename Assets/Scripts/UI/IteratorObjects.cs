@@ -42,6 +42,11 @@ public class IteratorObjects<T,E>
     {
         return objects[currentIndex];
     }
+
+    public T GetCurrentItem()
+    {
+        return selectorItems[currentIndex];
+    }
     
     public int GetCurrentIndex()
     {
