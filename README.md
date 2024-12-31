@@ -19,7 +19,7 @@ Ultrahot is a 3D FPS game where you are a robot that must destroy all other robo
 
 ![Weapons](https://i.imghippo.com/files/TWC6776Tbo.png)
 
-## About the habilities
+## About the abilities
 - **Electroshock:** Stuns the enemy for a long time and does a little damage
 - **Burning:** Stuns enemies for a short time and does a lot of damage
 - **Bullet Time:** Slows down game time, while the player moves in real time
